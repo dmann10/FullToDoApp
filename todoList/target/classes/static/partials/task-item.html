@@ -1,0 +1,13 @@
+<input type="checkbox" class="checkbox"
+	ng-click="toggleCheck(task)"
+	ng-checked="task.complete">
+</input>
+<p class="task" ng-class="{'checkItemOff': task.complete}" ng-hide="task.inEdit">{{task.task}}</p>
+<input class="newListItem" value="{{task.task}}"
+	ng-show="task.inEdit"
+	ng-model="task.task">
+</input>
+					
+<a href='#' class='editLink' ng-click="editTask(task)" ng-hide="task.inEdit">edit</a>
+<a href='#' class='editLink' ng-click="updateTask(task)" ng-show="task.inEdit">save</a>
+					

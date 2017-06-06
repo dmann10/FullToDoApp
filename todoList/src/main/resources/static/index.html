@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>To-Do List</title>
+	<link type="text/css" rel="stylesheet" href="style/ToDoList.css"/> 
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
+</head>
+<body ng-app="toDoList">
+	<div id="main" ng-controller="ToDoListController">
+		<h4>To-Do List</h4>
+		<form name="inputForm" id="inputForm" ng-submit="addTask()">
+			<input ng-model="newTask.task" type="text" id="txtbxNewTask" placeholder="To-Do">
+			<input type="submit" id="btnAddNewTask" value ="ADD">
+			<br><br>
+		</form>
+		<div id="listBox" name="display">
+			<ul id ="taskList">Tasks:
+				<li class="listItem" ng-repeat="task in tasks">
+					<task-item task="task"></task-item>
+					<a href='#' class='deleteLink' ng-click="deleteTask(task)" ng-hide="task.inEdit">delete</a>
+					<a href='#' class='deleteLink' ng-click="cancelUpdate(task)" ng-show="task.inEdit">cancel</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+<script type="text/javascript" src="app/ToDoApp.js"></script>
+<script type="text/javascript" src="app/ToDoController.js"></script>
+<script type="text/javascript" src="app/ToDoDirective.js"></script>
+<script type="text/javascript" src="app/ToDoServices.js"></script>
+</body>
+</html>
