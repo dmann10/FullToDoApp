@@ -1,7 +1,6 @@
 (function() {
 
 angular.module('toDoList')
-
 .controller("ToDoListController", ['$scope', 'ToDoServices', function($scope, ToDoServices) {
 	
 	$scope.tasks = [];	
@@ -41,6 +40,7 @@ angular.module('toDoList')
 	$scope.deleteTask = function(task) {
 
 		var index = $scope.tasks.indexOf(task);
+		console.log(index);
 		
 		ToDoServices.deleteTask(task).then(function(response) { 
 			
@@ -62,12 +62,15 @@ angular.module('toDoList')
 	$scope.editTask = function(task) {
 		
 		task.inEdit = !task.inEdit;
-		task.taskCopy = task.task;	
+		task.taskCopy = task.task;
 	};
 
 	//Update task in the server
 	$scope.updateTask = function(task) {
 		task.inEdit = !task.inEdit;
+		
+		if(task.complete == true)
+			$scope.toggleCheck(task);
 		
 		ToDoServices.updateTask(task).then(function(response) {
 			
@@ -79,7 +82,31 @@ angular.module('toDoList')
 		task.inEdit = !task.inEdit;
 		task.task = task.taskCopy;
 	};
-
+	
+	$scope.removeAll = function() {
+	
+		for(var i = $scope.tasks.length - 1; i >= 0 ; i--)
+		{
+			if($scope.tasks[i].complete == true)
+			{
+				ToDoServices.deleteTask($scope.tasks[i]).then(function(response) {
+					
+				});
+				$scope.getTasks();
+			}
+		}
+	};
+	
+	$scope.checkAll = function() {
+		
+		for(var i = 0 ; i < $scope.tasks.length; i++)
+		{
+			if($scope.tasks[i].complete != true)
+				$scope.toggleCheck($scope.tasks[i])			
+		}
+		
+	};
+	
 }]);
 
 })();
