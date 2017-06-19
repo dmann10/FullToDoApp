@@ -4,10 +4,11 @@
 	<title>To-Do List</title>
 	<link type="text/css" rel="stylesheet" href="style/ToDoList.css"/> 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
 </head>
 <body ng-app="toDoList">
-	<div id="main" ng-controller="ToDoListController">
+	<div id="main" ng-controller="ToDoListController as toDoListCtrl">
 		<h4>To-Do List</h4>
 		<form name="inputForm" id="inputForm" ng-submit="addTask()">
 			<input ng-model="newTask.task" type="text" id="txtbxNewTask" placeholder="To-Do">
@@ -23,6 +24,10 @@
 				</li>
 			</ul>
 		</div>
+		<br>
+		<input type="submit" class='btn' ng-click="checkAll()" value="Mark All Tasks Complete"></input>
+		<input type="submit" class='btn' ng-click="removeAll()" value="Remove Completed Tasks"></input>
+		
 	</div>
 <script type="text/javascript" src="app/ToDoApp.js"></script>
 <script type="text/javascript" src="app/ToDoController.js"></script>
